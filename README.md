@@ -1,2 +1,5 @@
-# Algorithm
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub v3](https://github.com/raphaelheinz/LeetHub-3.0)
+# Submissions
+All My LeetCode Submissions!
+
+# 목표
+하루에 하나씩이라도 꼭 풀기!
