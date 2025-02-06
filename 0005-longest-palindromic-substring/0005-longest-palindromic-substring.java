@@ -20,10 +20,10 @@ class Solution {
         
         return answer.toString();
     }
-    
-    public boolean isPalindrome(String s, int left, int right) {
-        for (int j = left; j <= (left + right) / 2; j++) {
-            if (s.charAt(j) != s.charAt(right - (j - left))) {
+
+    public boolean isPalindrome(String s, int start, int end) {
+        for (int j = start; j <= (start + end) / 2; j++) {
+            if (s.charAt(j) != s.charAt(end - (j - start))) {
                 return false;
             }
         }
