@@ -1,35 +1,97 @@
-<h2><a href="https://leetcode.com/problems/most-common-word/">819. Most Common Word</a></h2><h3>Easy</h3><hr><p>Given a string <code>paragraph</code> and a string array of the banned words <code>banned</code>, return <em>the most frequent word that is not banned</em>. It is <strong>guaranteed</strong> there is <strong>at least one word</strong> that is not banned, and that the answer is <strong>unique</strong>.</p>
+<h2><a href="https://leetcode.com/problems/most-common-word/">819. Most Common Word</a></h2>
 
-<p>The words in <code>paragraph</code> are <strong>case-insensitive</strong> and the answer should be returned in <strong>lowercase</strong>.</p>
+![image](https://github.com/user-attachments/assets/090ea4a2-1055-4fbd-a144-ae8e26e10c12)
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+## 문제 
+1. 주어진 문자열 `paragraph`와 금지된 단어 배열 `banned`를 사용하여, 금지된 단어가 아니면서 가장 많이 사용된 단어를 리턴하기
+2. 금지되지 않은 단어가 적어도 하나는 있으며, 그 정답은 유일하다
+3. `paragraph`에 있는 단어들은 대소문자를 구별하지 않으며, 정답은 소문자로 반환되어야 한다
 
-<pre>
-<strong>Input:</strong> paragraph = &quot;Bob hit a ball, the hit BALL flew far after it was hit.&quot;, banned = [&quot;hit&quot;]
-<strong>Output:</strong> &quot;ball&quot;
-<strong>Explanation:</strong> 
-&quot;hit&quot; occurs 3 times, but it is a banned word.
-&quot;ball&quot; occurs twice (and no other word does), so it is the most frequent non-banned word in the paragraph. 
-Note that words in the paragraph are not case sensitive,
-that punctuation is ignored (even if adjacent to words, such as &quot;ball,&quot;), 
-and that &quot;hit&quot; isn&#39;t the answer even though it occurs more because it is banned.
-</pre>
+## 해결방안
+```
+String words = paragraph.replaceAll("[^a-zA-Z]", " ").toLowerCase();
+String[] normal = words.split("\\s+");
+```
 
-<p><strong class="example">Example 2:</strong></p>
+`paragraph`에 존재하는 알파벳이 아닌 글자는 모두 공백으로 바꾸고 (, !, . 등) 소문자로 변환한다. -> 알파벳이 아닌 것들 저 식은 구글링했습니다 ㅠ 
+소문자로 변환한 문자열을 공백으로 `split` 하여 배열에 저장한다
 
-<pre>
-<strong>Input:</strong> paragraph = &quot;a.&quot;, banned = []
-<strong>Output:</strong> &quot;a&quot;
-</pre>
+```
+HashMap<String, Integer> split = new HashMap();
+```
+나온 단어들과 횟수를 저장하기 위해 `HashMap`을 사용했다
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+```
+for (String word: normal) {
+            boolean isBanned = false;
+            for (String ban : banned) {
+                if (ban.equals(word)) {
+                    isBanned = true;
+                    break;
+                }
+            }
 
-<ul>
-	<li><code>1 &lt;= paragraph.length &lt;= 1000</code></li>
-	<li>paragraph consists of English letters, space <code>&#39; &#39;</code>, or one of the symbols: <code>&quot;!?&#39;,;.&quot;</code>.</li>
-	<li><code>0 &lt;= banned.length &lt;= 100</code></li>
-	<li><code>1 &lt;= banned[i].length &lt;= 10</code></li>
-	<li><code>banned[i]</code> consists of only lowercase English letters.</li>
-</ul>
+            if (!isBanned) {
+                split.put(word, split.getOrDefault(word, 0) + 1);
+            }
+        }
+```
+배열에 들어가있는 단어를 하나씩 돌면서 `banned` 에 포함되어 있는지 확인한 후, 들어가있지 않으면 `HashMap`에 추가했다.
+처음 들어가는 단어들은 `value`를 `0`으로 넣어주며, 또 발견될때마다 `value+1`을 해주었다
+
+```
+String mostCommon = "";
+        int max = 0;
+
+        for (HashMap.Entry<String, Integer> entry : split.entrySet()) {
+            if (entry.getValue() > max) {
+                mostCommon = entry.getKey();
+                max = entry.getValue();
+            }
+        }
+```
+
+`HashMap`을 `for문`으로 돌면서 가장 높은 `value` 값이 있는 `entry`의 `key`값을 찾는다
+
+## 내 코드
+```import java.util.HashMap;
+
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        String words = paragraph.replaceAll("[^a-zA-Z]", " ").toLowerCase();
+
+        String[] normal = words.split("\\s+");
+        
+        HashMap<String, Integer> split = new HashMap();
+
+        for (String word: normal) {
+            boolean isBanned = false;
+            for (String ban : banned) {
+                if (ban.equals(word)) {
+                    isBanned = true;
+                    break;
+                }
+            }
+
+            if (!isBanned) {
+                split.put(word, split.getOrDefault(word, 0) + 1);
+            }
+        }
+    
+        String mostCommon = "";
+        int max = 0;
+
+        for (HashMap.Entry<String, Integer> entry : split.entrySet()) {
+            if (entry.getValue() > max) {
+                mostCommon = entry.getKey();
+                max = entry.getValue();
+            }
+        }
+
+        return mostCommon;
+    }
+}
+```
+
+## 개선할 점
+`이중 for문`을 꼭 사용해야할까? 어떻게 하면 `이중 for문` 없이 문제를 해결할 수 있을까
