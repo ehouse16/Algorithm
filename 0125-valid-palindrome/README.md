@@ -1,37 +1,56 @@
-<h2><a href="https://leetcode.com/problems/valid-palindrome">125. Valid Palindrome</a></h2><h3>Easy</h3><hr><p>A phrase is a <strong>palindrome</strong> if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.</p>
+<h2><a href="https://leetcode.com/problems/valid-palindrome">125. Valid Palindrome</a></h2>
 
-<p>Given a string <code>s</code>, return <code>true</code><em> if it is a <strong>palindrome</strong>, or </em><code>false</code><em> otherwise</em>.</p>
+## 문제
+1. 기존 문자열을 소문자로 바꾸고 알파벳이 아닌 글자는 모두 지운다
+2. 앞 뒤로 읽을 때 똑같아야한다
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+## 해결방안
+```String s2 = s.toLowerCase().trim();``` 
+으로 소문자와 공백제거
 
-<pre>
-<strong>Input:</strong> s = &quot;A man, a plan, a canal: Panama&quot;
-<strong>Output:</strong> true
-<strong>Explanation:</strong> &quot;amanaplanacanalpanama&quot; is a palindrome.
-</pre>
+```
+for(int i = 0; i < s2.length(); i++){
+  if(Character.isLetterOrDigit(s2.charAt(i)))
+    word+=s2.charAt(i);
+}
+```
+으로 숫자와 문자시 String word에 합치기
 
-<p><strong class="example">Example 2:</strong></p>
+```
+for(int j = 0; j < word.length(); j++){
+  if(word.charAt(j)!=word.charAt(word.length()-1-j))
+    return false;
+}
+return true;
+```
+으로 맨 앞 글자와 맨 뒷글자가 다르면 false, for문을 끝까지 다 돌았다면 (다른 단어가 없다면) true 반환
 
-<pre>
-<strong>Input:</strong> s = &quot;race a car&quot;
-<strong>Output:</strong> false
-<strong>Explanation:</strong> &quot;raceacar&quot; is not a palindrome.
-</pre>
 
-<p><strong class="example">Example 3:</strong></p>
+## 내 코드
+```
+class Solution {
+    public boolean isPalindrome(String s) {
+        String s2 = s.toLowerCase().trim();
 
-<pre>
-<strong>Input:</strong> s = &quot; &quot;
-<strong>Output:</strong> true
-<strong>Explanation:</strong> s is an empty string &quot;&quot; after removing non-alphanumeric characters.
-Since an empty string reads the same forward and backward, it is a palindrome.
-</pre>
+        String word = "";
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+        for(int i = 0; i < s2.length(); i++){
+            if(Character.isLetterOrDigit(s2.charAt(i)))
+                word+=s2.charAt(i);
+        }
 
-<ul>
-	<li><code>1 &lt;= s.length &lt;= 2 * 10<sup>5</sup></code></li>
-	<li><code>s</code> consists only of printable ASCII characters.</li>
-</ul>
+        //System.out.println(word);
+
+        for(int j = 0; j < word.length(); j++){
+            if(word.charAt(j)!=word.charAt(word.length()-1-j))
+                return false;
+        }
+        return true;
+    }
+}
+```
+
+## 개선 방안
+* for문을 두 번 사용하는 것이 맘에 들지 않는다 -> 한번으로 해결하고 싶다
+* 굳이 새로운 String word를 만들어야할까? -> 만들지 않고 반복문 내에서 처리해보기
+
