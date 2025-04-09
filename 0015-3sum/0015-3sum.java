@@ -1,7 +1,7 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(nums); 
+        Arrays.sort(nums); // 정렬
 
         int n = nums.length;
 
@@ -25,7 +25,7 @@ class Solution {
                 } else if (sum < 0) {
                     left++; 
                 } else {
-                    right--; 
+                    right--;
                 }
             }
         }
