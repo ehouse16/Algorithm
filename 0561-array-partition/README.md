@@ -1,6 +1,6 @@
 <h2><a href="https://leetcode.com/problems/array-partition">561. Array Partition</a></h2><h3>Easy</h3>
 
-![image](https://github.com/user-attachments/assets/ac1dd2f3-da57-4fca-8445-c4974f6e4bba)
+![image](https://github.com/user-attachments/assets/63ae9efd-abf4-41c8-a2e3-5aea66c75a0f)
 
 ## 문제
 1. 주어진 2n개의 int 배열을 가지고 n개의 짝을 만든다
@@ -21,11 +21,11 @@ Arrays.sort(nums);
 1. 배열을 정렬한다
 
 ```java
-for(int i = 0; i < length - 1; i+=2){
-    sum += Math.min(nums[i], nums[i+1]);
+for(int i = 0; i < length; i+=2){
+    sum += nums[i];
 }
 ```
-2. 2개씩 짝을 지으니 2씩 더해주고, 각각의 min value 를 더한다
+2. 어차피 2개씩 잘라서 min value를 구해도 그게 i번째 숫자이니 바로 더한다
 3. 그렇게 나온 sum을 return!
 
 ## 내 코드
