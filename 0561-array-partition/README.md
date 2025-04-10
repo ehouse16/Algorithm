@@ -1,30 +1,46 @@
-<h2><a href="https://leetcode.com/problems/array-partition">561. Array Partition</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code> of <code>2n</code> integers, group these integers into <code>n</code> pairs <code>(a<sub>1</sub>, b<sub>1</sub>), (a<sub>2</sub>, b<sub>2</sub>), ..., (a<sub>n</sub>, b<sub>n</sub>)</code> such that the sum of <code>min(a<sub>i</sub>, b<sub>i</sub>)</code> for all <code>i</code> is <strong>maximized</strong>. Return<em> the maximized sum</em>.</p>
+<h2><a href="https://leetcode.com/problems/array-partition">561. Array Partition</a></h2><h3>Easy</h3>
+![image](https://github.com/user-attachments/assets/ac1dd2f3-da57-4fca-8445-c4974f6e4bba)
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+## 문제
+1. 주어진 2n개의 int 배열을 가지고 n개의 짝을 만든다
+2. 각각의 짝의 min value를 구해서 더한다
+3. 모두 더한 값이 최댓값이라면 그 값을 반환한다 
 
-<pre>
-<strong>Input:</strong> nums = [1,4,3,2]
-<strong>Output:</strong> 4
-<strong>Explanation:</strong> All possible pairings (ignoring the ordering of elements) are:
-1. (1, 4), (2, 3) -&gt; min(1, 4) + min(2, 3) = 1 + 2 = 3
-2. (1, 3), (2, 4) -&gt; min(1, 3) + min(2, 4) = 1 + 2 = 3
-3. (1, 2), (3, 4) -&gt; min(1, 2) + min(3, 4) = 1 + 3 = 4
-So the maximum possible sum is 4.</pre>
+## 풀이 방식
+문제의 Example에 나와있는 걸 보니까 정렬하고 순서대로 자른다면 최댓값이 나온다는 걸 알게 되었다! 그래서 쉽게 풀 수 있던 문제였다
 
-<p><strong class="example">Example 2:</strong></p>
+Ex) 
+`1,4,3,2`가 주어진 배열이라면 정렬해서 `1,2,3,4` 로 만든다
+그러면 `(1,2), (3,4)`로 잘리게 되고
+각 `min` 값인 1+3을 더한다면 최댓값인 4가 나오게 된다
 
-<pre>
-<strong>Input:</strong> nums = [6,2,6,5,1,2]
-<strong>Output:</strong> 9
-<strong>Explanation:</strong> The optimal pairing is (2, 1), (2, 5), (6, 6). min(2, 1) + min(2, 5) + min(6, 6) = 1 + 2 + 6 = 9.
-</pre>
+```java
+Arrays.sort(nums);
+```
+1. 배열을 정렬한다
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+```java
+for(int i = 0; i < length - 1; i+=2){
+    sum += Math.min(nums[i], nums[i+1]);
+}
+```
+2. 2개씩 짝을 지으니 2씩 더해주고, 각각의 min value 를 더한다
+3. 그렇게 나온 sum을 return!
 
-<ul>
-	<li><code>1 &lt;= n &lt;= 10<sup>4</sup></code></li>
-	<li><code>nums.length == 2 * n</code></li>
-	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
-</ul>
+## 내 코드
+```java
+class Solution {
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+
+        int length = nums.length;
+        int sum = 0;
+
+        for(int i = 0; i < length - 1; i+=2){
+            sum += Math.min(nums[i], nums[i+1]);
+        }
+        
+        return sum;
+    }
+}
+```
