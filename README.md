@@ -14,9 +14,9 @@
 | 난이도 | 푼 문제 수 |
 |--------|------------|
 | 🟢 Easy   | 5개         |
-| 🟡 Medium | 3개        |
+| 🟡 Medium | 4개        |
 | 🔴 Hard   | 1개         |
-| 🧠 Total  | 9개        |
+| 🧠 Total  | 10개        |
 
 
 ## 문제 풀 순서
@@ -35,7 +35,7 @@
 - ✅ [008-빗물 트래핑](https://leetcode.com/problems/trapping-rain-water/)
 - ✅ [009-세 수의 합](https://leetcode.com/problems/3sum/)
 - ✅ [010-배열 파티션I](https://leetcode.com/problems/array-partition/)
-- [011-자신을 제외한 배열의 곱](https://leetcode.com/problems/product-of-array-except-self)
+- ✅[011-자신을 제외한 배열의 곱](https://leetcode.com/problems/product-of-array-except-self)
 - [012-주식을 사고팔기 가장 좋은 시점](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
 ### 연결 리스트
