@@ -13,10 +13,10 @@
 
 | 난이도 | 푼 문제 수 |
 |--------|------------|
-| 🟢 Easy   | 7개         |
+| 🟢 Easy   | 8개         |
 | 🟡 Medium | 4개        |
 | 🔴 Hard   | 1개         |
-| 🧠 Total  | 12개        |
+| 🧠 Total  | 13개        |
 
 
 ## 문제 풀 순서
@@ -40,8 +40,8 @@
 
 ### 연결 리스트
 
-- [013-팰린드롬 연결 리스트](https://leetcode.com/problems/palindrome-linked-list/)
-- [014-두 정렬 리스트의 병합](https://leetcode.com/problems/merge-two-sorted-lists/)
+- ✅ [013-팰린드롬 연결 리스트](https://leetcode.com/problems/palindrome-linked-list/)
+- ✅ [014-두 정렬 리스트의 병합](https://leetcode.com/problems/merge-two-sorted-lists/)
 - [015-역순 연결 리스트I](https://leetcode.com/problems/reverse-linked-list/)
 - [016-두 수의 덧셈](https://leetcode.com/problems/add-two-numbers/)
 - [017-페어의 노드 스왑](https://leetcode.com/problems/swap-nodes-in-pairs/)
