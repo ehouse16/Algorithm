@@ -1,36 +1,80 @@
-<h2><a href="https://leetcode.com/problems/merge-two-sorted-lists">21. Merge Two Sorted Lists</a></h2><h3>Easy</h3><hr><p>You are given the heads of two sorted linked lists <code>list1</code> and <code>list2</code>.</p>
+<h2><a href="https://leetcode.com/problems/merge-two-sorted-lists">21. Merge Two Sorted Lists</a></h2><h3>Easy</h3>
 
-<p>Merge the two lists into one <strong>sorted</strong> list. The list should be made by splicing together the nodes of the first two lists.</p>
+![image](https://github.com/user-attachments/assets/5041f349-201f-434e-93cf-d76bea4b3fcb)
 
-<p>Return <em>the head of the merged linked list</em>.</p>
+## 문제
+1. 2개의 정렬된 list1과 list2의 시작점이 주어진다
+2. 2개의 list를 하나의 정렬된 리스트로 합쳐라
+3. 정렬된 리스트의 시작점을 반환해라
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg" style="width: 662px; height: 302px;" />
-<pre>
-<strong>Input:</strong> list1 = [1,2,4], list2 = [1,3,4]
-<strong>Output:</strong> [1,1,2,3,4,4]
-</pre>
+## 풀이 방식
+```java
+ListNode dummy = new ListNode(-1);
+ListNode returnValue = dummy;
+```
+- dummy 노드를 하나 생성해서, 결과 리스트의 시작 지점으로 사용
 
-<p><strong class="example">Example 2:</strong></p>
+```java
+while(list1 != null && list2 != null){
+    if(list1.val < list2.val){
+        returnValue.next = list1;
+        list1 = list1.next;
+    }
+    else{
+        returnValue.next = list2;
+        list2 = list2.next;
+    }
+    returnValue = returnValue.next;
+}
+```
+- returnValue 포인터는 결과 리스트를 따라가며 새로운 노드를 연결-
+- list1과 list2가 모두 남아 있는 동안, 두 노드의 값을 비교해서 작은 값을 결과 리스트에 연결
 
-<pre>
-<strong>Input:</strong> list1 = [], list2 = []
-<strong>Output:</strong> []
-</pre>
+```java
+if(list1 != null){
+    returnValue.next = list1;
+} else {
+     returnValue.next = list2;
+}
+```
 
-<p><strong class="example">Example 3:</strong></p>
+- 하나의 리스트가 먼저 끝나면, 남은 리스트를 통째로 결과 리스트에 붙임
 
-<pre>
-<strong>Input:</strong> list1 = [], list2 = [0]
-<strong>Output:</strong> [0]
-</pre>
+```java
+return dummy.next;
+```
+- 마지막에 dummy.next를 반환해서 진짜 결과 리스트의 시작 노드를 넘김
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+## 내 코드
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode returnValue = dummy;
 
-<ul>
-	<li>The number of nodes in both lists is in the range <code>[0, 50]</code>.</li>
-	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
-	<li>Both <code>list1</code> and <code>list2</code> are sorted in <strong>non-decreasing</strong> order.</li>
-</ul>
+        while(list1 != null && list2 != null){
+            if(list1.val < list2.val){
+                returnValue.next = list1;
+                list1 = list1.next;
+            }
+            else{
+                returnValue.next = list2;
+                list2 = list2.next;
+            }
+            returnValue = returnValue.next;
+        } 
+
+        if(list1 != null){
+            returnValue.next = list1;
+        } else {
+            returnValue.next = list2;
+        }
+
+        return dummy.next;
+    }
+}
+```
+
+https://velog.io/@ehouse16/ListNode%EC%99%80-%EC%97%B0%EA%B2%B0-%EB%A6%AC%EC%8A%A4%ED%8A%B8
+
+ListNode 정리 글 작성 완료. 이 문제 풀다가 도저히 안되겠어서 정리를 하고 풀었다ㅠ 해도해도 어려운 것...😥
