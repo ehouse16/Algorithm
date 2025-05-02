@@ -4,6 +4,9 @@
 - 주어진 단일 연결 리스트의 `head`를 가지고 list를 역순으로 바꿔 반환해라
 ![image](https://github.com/user-attachments/assets/d5e047c1-d9af-41f1-af7c-71f766558252)
 
+![image](https://github.com/user-attachments/assets/3141fcd3-aa48-4d76-b138-1aff7b034feb)
+
+
 ### 풀이 방식
 예전에 정리해둔 ListNode 글을 보고 변경 전 미리 다음 노드를 저장해두자! 라는 걸 기억하여 prev를 만들고 현재 head를 current에 저장했다
 ```
