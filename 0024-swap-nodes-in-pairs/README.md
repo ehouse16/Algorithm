@@ -1,46 +1,50 @@
-<h2><a href="https://leetcode.com/problems/swap-nodes-in-pairs">24. Swap Nodes in Pairs</a></h2><h3>Medium</h3><hr><p>Given a&nbsp;linked list, swap every two adjacent nodes and return its head. You must solve the problem without&nbsp;modifying the values in the list&#39;s nodes (i.e., only nodes themselves may be changed.)</p>
+<h2><a href="https://leetcode.com/problems/swap-nodes-in-pairs">24. Swap Nodes in Pairs</a></h2><h3>Medium</h3>
+<img width="567" height="560" alt="image" src="https://github.com/user-attachments/assets/1d8bbf54-ab7e-4c2a-9e06-7e5d380e0c8a" />
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+### 문제
+연결 리스트를 직접 값(value)가 아닌 **노드의 연결(next)** 을 바꿔서 두 개씩 swap하기
+<img width="467" height="388" alt="image" src="https://github.com/user-attachments/assets/8f090e86-53e9-4ec9-86d7-ddf0e4e0d932" />
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">head = [1,2,3,4]</span></p>
+### 풀이방식
+```java
+ListNode dummy = new ListNode(0);
+dummy.next = head;  // dummy → 1 → 2 → 3 → 4
+ListNode prev = dummy;
+```
+- dummy: swap 이후의 head 반환용
+- prev: 매 번 swap 이후의 다음 쌍 앞의 노드를 가리킴
 
-<p><strong>Output:</strong> <span class="example-io">[2,1,4,3]</span></p>
+```java
+prev.next = second;         // dummy → 2
+first.next = second.next;   // 1 → 3
+second.next = first;        // 2 → 1
+```
 
-<p><strong>Explanation:</strong></p>
+```java
+prev = first;       // prev → 1
+head = first.next;  // head → 3
+```
 
-<p><img alt="" src="https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg" style="width: 422px; height: 222px;" /></p>
-</div>
+### 내 코드
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head){
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
 
-<p><strong class="example">Example 2:</strong></p>
+        while(head != null && head.next != null){
+            ListNode first = head;
+            ListNode second = head.next;
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">head = []</span></p>
+            prev.next = second;
+            first.next = second.next;
+            second.next = first;
 
-<p><strong>Output:</strong> <span class="example-io">[]</span></p>
-</div>
-
-<p><strong class="example">Example 3:</strong></p>
-
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">head = [1]</span></p>
-
-<p><strong>Output:</strong> <span class="example-io">[1]</span></p>
-</div>
-
-<p><strong class="example">Example 4:</strong></p>
-
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">head = [1,2,3]</span></p>
-
-<p><strong>Output:</strong> <span class="example-io">[2,1,3]</span></p>
-</div>
-
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li>The number of nodes in the&nbsp;list&nbsp;is in the range <code>[0, 100]</code>.</li>
-	<li><code>0 &lt;= Node.val &lt;= 100</code></li>
-</ul>
+            prev = first;
+            head = first.next;
+        }
+        return dummy.next;
+    }
+}
+```
