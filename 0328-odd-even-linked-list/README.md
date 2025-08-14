@@ -1,30 +1,38 @@
-<h2><a href="https://leetcode.com/problems/odd-even-linked-list">328. Odd Even Linked List</a></h2><h3>Medium</h3><hr><p>Given the <code>head</code> of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return <em>the reordered list</em>.</p>
+<h2><a href="https://leetcode.com/problems/odd-even-linked-list">328. Odd Even Linked List</a></h2><h3>Medium</h3>
 
-<p>The <strong>first</strong> node is considered <strong>odd</strong>, and the <strong>second</strong> node is <strong>even</strong>, and so on.</p>
+### 문제
+- 단일 연결 리스트에서 홀수, 짝수 순서로 노드들을 배치
+- 공간 복잡도 O(1), 시작 복잡도 O(n)
 
-<p>Note that the relative order inside both the even and odd groups should remain as it was in the input.</p>
+<img width="444" height="493" alt="image" src="https://github.com/user-attachments/assets/753c8866-902d-48ba-adf5-be180b6fca14" />
 
-<p>You must solve the problem&nbsp;in <code>O(1)</code>&nbsp;extra space complexity and <code>O(n)</code> time complexity.</p>
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/03/10/oddeven-linked-list.jpg" style="width: 300px; height: 123px;" />
-<pre>
-<strong>Input:</strong> head = [1,2,3,4,5]
-<strong>Output:</strong> [1,3,5,2,4]
-</pre>
+### 풀이 방식
+```java
+ListNode odd = head;
+ListNode even = head.next;
+ListNode evenHead = even;
+```
+- odd: 홀수 노드를 만들 때 사용
+- even: 짝수 노드를 만들 때 사용
+- evenHead: 홀수 리스트 뒤에 붙일 때 사용
 
-<p><strong class="example">Example 2:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/03/10/oddeven2-linked-list.jpg" style="width: 500px; height: 142px;" />
-<pre>
-<strong>Input:</strong> head = [2,1,3,5,6,4,7]
-<strong>Output:</strong> [2,3,6,7,1,5,4]
-</pre>
+```java
+while (even != null && even.next != null) {
+    odd.next = odd.next.next;   // 홀수 → 다음 홀수로 연결
+    even.next = even.next.next; // 짝수 → 다음 짝수로 연결
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+    even = even.next;           // 짝수 포인터 이동
+    odd = odd.next;             // 홀수 포인터 이동
+}
+```
+- 홀수 -> 다음 홀수로 연결
+- 짝수 -> 다름 짝수로 연결
 
-<ul>
-	<li>The number of nodes in the linked list is in the range <code>[0, 10<sup>4</sup>]</code>.</li>
-	<li><code>-10<sup>6</sup> &lt;= Node.val &lt;= 10<sup>6</sup></code></li>
-</ul>
+```java
+odd.next = evenHead;
+```
+- 홀수 리스트의 마지막 노드를 짝수 리스트 시작에 연결
+  
+### 느낀 점
+어제 문제와 비슷하여 좀 빨리 풀었던 거 같다. 처음에 예외처리 안넣으니까 pass가 안되었었는데,, 예외처리도 습관적으로 사용해야겠다고 생각했다
