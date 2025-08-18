@@ -1,29 +1,76 @@
-<h2><a href="https://leetcode.com/problems/reverse-linked-list-ii">92. Reverse Linked List II</a></h2><h3>Medium</h3><hr><p>Given the <code>head</code> of a singly linked list and two integers <code>left</code> and <code>right</code> where <code>left &lt;= right</code>, reverse the nodes of the list from position <code>left</code> to position <code>right</code>, and return <em>the reversed list</em>.</p>
+<h2><a href="https://leetcode.com/problems/reverse-linked-list-ii">92. Reverse Linked List II</a></h2><h3>Medium</h3>
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/rev2ex2.jpg" style="width: 542px; height: 222px;" />
-<pre>
-<strong>Input:</strong> head = [1,2,3,4,5], left = 2, right = 4
-<strong>Output:</strong> [1,4,3,2,5]
-</pre>
+### 문제
+주어진 left와 right 사이의 수만 reverse하기
+<img width="405" height="177" alt="image" src="https://github.com/user-attachments/assets/098e7a9b-82e2-4c13-8cb9-740cfcd1c768" />
+<img width="406" height="556" alt="image" src="https://github.com/user-attachments/assets/f6a80022-07bb-46e1-88b1-851903c93962" />
 
-<p><strong class="example">Example 2:</strong></p>
+### 풀이 방식
+```java
+for (int i = 1; i < left; i++) {
+    prev = prev.next;
+}
+```
+- left 위치 직전 노드까지 이동하기
 
-<pre>
-<strong>Input:</strong> head = [5], left = 1, right = 1
-<strong>Output:</strong> [5]
-</pre>
+```java
+ListNode curr = prev.next;
+ListNode subTail = curr;  
+ListNode rev = null;
+```
+- curr: 실제 뒤집기 시작할 노트
+- subTail: 나중에 뒤쪽과 연결할 때 사용
+- rev: 뒤집힌 리스트의 앞쪽을 가리킬 임시 변수
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+```java
+for (int i = left; i <= right; i++) {
+    ListNode next = curr.next;
+    curr.next = rev;
+    rev = curr;
+    curr = next;
+}
+```
+- 뒤집기!
 
-<ul>
-	<li>The number of nodes in the list is <code>n</code>.</li>
-	<li><code>1 &lt;= n &lt;= 500</code></li>
-	<li><code>-500 &lt;= Node.val &lt;= 500</code></li>
-	<li><code>1 &lt;= left &lt;= right &lt;= n</code></li>
-</ul>
+```java
+prev.next = rev;
+```
+- 앞쪽 연결
 
-<p>&nbsp;</p>
-<strong>Follow up:</strong> Could you do it in one pass?
+```java
+subTail.next = curr;
+```
+- 뒤쪽 연결
+  
+### 내 코드
+```java
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || left == right) return head;
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+
+        for (int i = 1; i < left; i++) {
+            prev = prev.next;
+        }
+
+        ListNode curr = prev.next;
+        ListNode subTail = curr;  
+        ListNode rev = null;
+
+        for (int i = left; i <= right; i++) {
+            ListNode next = curr.next;
+            curr.next = rev;
+            rev = curr;
+            curr = next;
+        }
+
+        prev.next = rev;
+        subTail.next = curr;
+
+        return dummy.next;
+    }
+}
+```
