@@ -14,9 +14,9 @@
 | 난이도 | 푼 문제 수 |
 |--------|------------|
 | 🟢 Easy   | 9개         |
-| 🟡 Medium | 6개        |
+| 🟡 Medium | 8개        |
 | 🔴 Hard   | 1개         |
-| 🧠 Total  | 16개        |
+| 🧠 Total  | 18개        |
 
 
 ## 문제 풀 순서
@@ -45,8 +45,8 @@
 - ✅ [015-역순 연결 리스트I](https://leetcode.com/problems/reverse-linked-list/)
 - ✅ [016-두 수의 덧셈](https://leetcode.com/problems/add-two-numbers/)
 - ✅ [017-페어의 노드 스왑](https://leetcode.com/problems/swap-nodes-in-pairs/)
-- [018-홀짝 연결 리스트](https://leetcode.com/problems/odd-even-linked-list/)
-- [019-역순 연결 리스트 II](https://leetcode.com/problems/reverse-linked-list-ii/)
+- ✅ [018-홀짝 연결 리스트](https://leetcode.com/problems/odd-even-linked-list/)
+- ✅ [019-역순 연결 리스트 II](https://leetcode.com/problems/reverse-linked-list-ii/)
 
 ### 스택, 큐
 
