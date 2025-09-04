@@ -13,10 +13,10 @@
 
 | 난이도 | 푼 문제 수 |
 |--------|------------|
-| 🟢 Easy   | 9개         |
+| 🟢 Easy   | 10개         |
 | 🟡 Medium | 8개        |
 | 🔴 Hard   | 1개         |
-| 🧠 Total  | 18개        |
+| 🧠 Total  | 19개        |
 
 
 ## 문제 풀 순서
@@ -50,7 +50,7 @@
 
 ### 스택, 큐
 
-- [020-유효한 괄호](https://leetcode.com/problems/valid-parentheses/)
+- ✅ [020-유효한 괄호](https://leetcode.com/problems/valid-parentheses/)
 - [021-중복 문자 제거](https://leetcode.com/problems/remove-duplicate-letters/)
 - [022-일일 온도](https://leetcode.com/problems/daily-temperatures/)
 - [023-큐를 이용한 스택 구현](https://leetcode.com/problems/implement-stack-using-queues/)
